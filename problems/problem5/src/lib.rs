@@ -1,12 +1,13 @@
 use std::cmp::Ordering;
 
-// Write a mortgage calculator based on the following algorithm:
+// Write a mortgage payoff calculator based on the following algorithm:
 // * User borrows big money sum P from bank.
 // * Bank sets interest rate R at percent - the speed of growth of the debt.
 // * At the end of each month the debt is increased by R / 12 percent.
 // * User sends to bank some predefined small sum M to decrease the debt.
 // * Debt is considered settled when its value is reduced to zero.
 
+#[derive(Default)]
 pub struct Mortgage {
     original_principal: i64,
     down_payment: i64,
@@ -24,29 +25,28 @@ fn compound_formula(principal: i64, interest_rate: f64) -> i64 {
     new_principal.round() as i64
 }
 
-
-    
 impl Mortgage {
-    // 2. Write the constructor
-    pub fn new() {
+    // https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+    pub fn new() -> Self {
+        Mortgage
     }
 
-    // 3. Calculate remaining principal after n months
+    // 2. Calculate remaining principal after n months
     fn principal_remaining(&self, months: i32, payment: i64) -> i64 {
         100
     }
     
-    // 4. Calculate minimum monthly payment required to pay the loan off on time.
+    // 3. Calculate minimum monthly payment required to pay the loan off on time.
     fn minimum_monthly_payment(&self) -> i64 {
         3000
     }
     
-    // 5. Calculate the total amount paid after n months
+    // 4. Calculate the total amount paid after n months
     fn total_payout(&self, months: i32, monthly_payment: i64) -> i64 {
         1_000_000 
     } 
     
-    // 6. Calculate time needed to pay off the loan given a monthly payment of x dollars
+    // 5. Calculate time needed to pay off the loan given a monthly payment of x dollars
     fn months_until_payoff(&self, monthly_payment: i64) -> i32 {
         12
     } 
@@ -70,9 +70,11 @@ mod test {
         
         let monthly_payment = 10000;
         
-        assert_eq!(mortgage.months_until_payoff(monthly_payment), 103);
+
         assert_eq!(mortgage.principal_remaining(2, monthly_payment), 787970);
+        assert_eq!(mortgage.minimum_monthly_payment(), 4,796);
         assert_eq!(mortgage.total_payout(103, monthly_payment), 1024209);
+        assert_eq!(mortgage.months_until_payoff(monthly_payment), 103);
        
     }
 }
