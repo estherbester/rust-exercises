@@ -69,9 +69,9 @@ mod test {
         
         let monthly_payment = 10000;
         
-        assert_eq!(mortgage.principal_remaining(2, monthly_payment), 787970);
-        assert_eq!(mortgage.minimum_monthly_payment(), 4,796);
-        assert_eq!(mortgage.total_payout(103, monthly_payment), 1024209);
+        assert_eq!(mortgage.principal_remaining(2, monthly_payment), 787_970);
+        assert_eq!(mortgage.minimum_monthly_payment(), 4796);
+        assert_eq!(mortgage.total_payout(103, monthly_payment), 1_024_209);
         assert_eq!(mortgage.months_until_payoff(monthly_payment), 103);
        
     }
