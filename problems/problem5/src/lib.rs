@@ -7,15 +7,6 @@ use std::cmp::Ordering;
 // * User sends to bank some predefined small sum M to decrease the debt.
 // * Debt is considered settled when its value is reduced to zero.
 
-#[derive(Default)]
-pub struct Mortgage {
-    original_principal: i64,
-    down_payment: i64,
-    interest_rate: f64,
-    loan_term_months: i32,
-}
-
-
 // 1. Write a test for this formula 
 fn compound_formula(principal: i64, interest_rate: f64) -> i64 {
     let principal = principal as f64;
@@ -23,6 +14,15 @@ fn compound_formula(principal: i64, interest_rate: f64) -> i64 {
     println!("interest: {}", interest);
     let new_principal = principal + interest ;
     new_principal.round() as i64
+}
+
+
+#[derive(Default)]
+pub struct Mortgage {
+    original_principal: i64,
+    down_payment: i64,
+    interest_rate: f64,
+    loan_term_months: i32,
 }
 
 impl Mortgage {
@@ -70,7 +70,6 @@ mod test {
         
         let monthly_payment = 10000;
         
-
         assert_eq!(mortgage.principal_remaining(2, monthly_payment), 787970);
         assert_eq!(mortgage.minimum_monthly_payment(), 4,796);
         assert_eq!(mortgage.total_payout(103, monthly_payment), 1024209);
